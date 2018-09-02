@@ -1,54 +1,45 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { createComponent } from 'react-fela'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// declare fela styles
-const __buttonStyle = props => ({
-  padding: '.5em 1.5em',
-  color: `${props.color || props.theme.colorGrey}`,
-  'background-color': props.theme.colorWhite,
-  border: '1px solid currentColor',
-  'border-radius': props.theme.borderRadius,
-  'text-align': 'center',
-  'vertical-align': 'middle',
-  cursor: 'pointer',
-  fontSize: `${props.theme.buttonSizes[props.size] ||
-    props.theme.buttonSizes['normal']}`,
-})
-
-const ButtonComponent = createComponent(__buttonStyle, 'button', [
-  'color',
-  'size',
-  'onClick',
-])
+import './Button.css';
 
 /**
  * The only true button.
- * Note: This component uses react-fela createComponent api to render styles for demo.
  */
-export default function Button(props) {
-  const { children, ...passDownProps } = props
-  return <ButtonComponent {...passDownProps}>{children}</ButtonComponent>
+export default function Button({ color, size, onClick, disabled, children }) {
+	const styles = {
+		color,
+		fontSize: Button.sizes[size],
+	};
+
+	return (
+		<button className="button" style={styles} onClick={onClick} disabled={disabled}>
+			{children}
+		</button>
+	);
 }
 Button.propTypes = {
-  /** Button label */
-  children: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.number.isRequired,
-  ]),
-  /** The color for the button */
-  color: PropTypes.string,
-  /** The size of the button */
-  size: PropTypes.oneOf(['small', 'normal', 'large']),
-  /** Gets called when the user clicks on the button */
-  onClick: PropTypes.func,
-}
+	/** Button label */
+	children: PropTypes.node.isRequired,
+	/** The color for the button */
+	color: PropTypes.string,
+	/** The size of the button */
+	size: PropTypes.oneOf(['small', 'normal', 'large']),
+	/** Disable button */
+	disabled: PropTypes.bool,
+	/** Gets called when the user clicks on the button */
+	onClick: PropTypes.func,
+};
 Button.defaultProps = {
-  color: '#333',
-  size: 'normal',
-  /* eslint-disable no-console */
-  onClick: event => {
-    console.log('You have clicked me!', event.target)
-  },
-  /* eslint-enable no-console */
-}
+	color: '#333',
+	size: 'normal',
+	onClick: event => {
+		// eslint-disable-next-line no-console
+		console.log('You have clicked me!', event.target);
+	},
+};
+Button.sizes = {
+	small: '10px',
+	normal: '14px',
+	large: '18px',
+};
