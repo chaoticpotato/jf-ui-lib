@@ -5,6 +5,7 @@
   ],
   "plugins": [
     "transform-class-properties",
-    "styled-components"
+    "styled-components",
+     "transform-object-rest-spread"
   ]
 }

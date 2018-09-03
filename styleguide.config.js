@@ -1,9 +1,16 @@
 const { version } = require('./package');
+const path = require('path');
 
 module.exports = {
-	components: 'src/components/**/[A-Z]*.js',
+  title: 'JotForm UI Component Library',
+  components: 'src/components/**/[A-Z]*.js',
+  exampleMode: 'expand',
+  usageMode: 'expand',
 	defaultExample: true,
 	version,
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, 'src/common/Provider')
+  },
 	webpackConfig: {
 		module: {
 			rules: [

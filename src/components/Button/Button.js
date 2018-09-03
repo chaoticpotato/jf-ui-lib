@@ -1,45 +1,84 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import './Button.css';
 
 /**
  * The only true button.
  */
-export default function Button({ color, size, onClick, disabled, children }) {
-	const styles = {
-		color,
-		fontSize: Button.sizes[size],
-	};
 
+const B = styled.button`
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.buttonSizes[props.size].fontSize};
+  height: ${props => props.theme.buttonSizes[props.size].height};
+  text-transform: ${props => props.theme.buttonSizes[props.size].textTransform};
+  padding: ${props => props.theme.buttonSizes[props.size].padding};
+  font-weight: ${props => props.theme.weightLight};
+  border-radius: ${props => props.theme.buttonBorderRadius};
+  border: 0;
+  cursor: ${props => props.disabled ? 'default': 'pointer'};
+  pointer-events: ${props => props.disabled ? 'none': 'inherit'};
+  background-color: ${props => props.disabled ? props.theme.buttonDisabledColorBg : props.theme.buttonStrength[props.strength].colorBg};
+  color: ${props => props.disabled ? props.theme.buttonDisabledColorText : props.theme.buttonStrength[props.strength].colorText};
+  user-select: none;
+  margin: 0 4px;
+  transition: ${props => props.theme.buttonTransition};
+
+  &:hover {
+    background-color: ${props => props.disabled ? props.theme.buttonDisabledColorBg : props.theme.buttonStrength[props.strength].hoverBg};
+  }
+
+  svg {
+    fill: ${props => props.disabled ? props.theme.buttonDisabledColorText : props.theme.buttonStrength[props.strength].colorText};
+  }
+`;
+
+const I = styled.span`
+  svg {
+    width: 15px;
+    margin-right: ${props => props.iconOnly ? '0': '8px'};
+    vertical-align: text-bottom;
+  }
+`;
+
+export default function Button({ className, children, title, disabled, icon, ...others }) {
+  const cx = className ? `jbtn ${className}` : 'jbtn';
 	return (
-		<button className="button" style={styles} onClick={onClick} disabled={disabled}>
-			{children}
-		</button>
+		<B
+      className={cx}
+      aria-label={title}
+      {...others}
+      tabIndex={disabled ? '-1' : null}
+      disabled={disabled}
+    >
+      { icon && <I iconOnly={ children ? false : true }>{icon}</I> }
+      { children }
+		</B>
 	);
 }
 Button.propTypes = {
 	/** Button label */
-	children: PropTypes.node.isRequired,
-	/** The color for the button */
-	color: PropTypes.string,
+  label: PropTypes.string,
+  /** Button icon */
+  icon: PropTypes.node,
 	/** The size of the button */
 	size: PropTypes.oneOf(['small', 'normal', 'large']),
+  /** The strength of the button */
+  strength: PropTypes.oneOf(['primary', 'secondary', 'delete', 'normal']),
 	/** Disable button */
 	disabled: PropTypes.bool,
+  /** Button Title for accessibility */
+  title: PropTypes.string,
 	/** Gets called when the user clicks on the button */
 	onClick: PropTypes.func,
 };
 Button.defaultProps = {
-	color: '#333',
 	size: 'normal',
+  strength: 'normal',
+  disabled: false,
+  title: 'Button',
 	onClick: event => {
 		// eslint-disable-next-line no-console
 		console.log('You have clicked me!', event.target);
 	},
-};
-Button.sizes = {
-	small: '10px',
-	normal: '14px',
-	large: '18px',
 };

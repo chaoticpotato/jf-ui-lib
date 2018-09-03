@@ -1,73 +1,36 @@
-Basic button:
+Normal button:
 
 ```jsx
-<Button>Push Me</Button>
+<Button>Normal</Button>
+<Button size="large">Big &amp; Normal</Button>
+<Button disabled>Disabled &amp; Normal</Button>
 ```
 
-Big pink button:
+Primary button:
 
 ```jsx
-<Button size="large" color="deeppink">
-  Lick Me
+<Button strength="primary">Primary</Button>
+
+<Button strength="primary" size="large">Big &amp; Primary</Button>
+
+<Button strength="primary" disabled>Disabled &amp; Primary</Button>
+
+<Button strength="primary" icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 18" className="injected-svg preview-icon" data-src="./img/print-icon.svg"><path fill="#fefefe" d="M4.75 12v6h9.5v-6zm1.19 2.4h7.12v-1.2H5.94zm0 2.4h7.12v-1.2H5.94zM4.75 0v6h9.5V0h-9.5z"></path><path fill="#fefefe" d="M16.62 3.6h-1.19v3.6H3.56V3.6H2.38A2.57 2.57 0 0 0 0 6v6a2.57 2.57 0 0 0 2.38 2.4h1.18v-3.6h11.87v3.6h1.19A2.57 2.57 0 0 0 19 12V6a2.57 2.57 0 0 0-2.38-2.4"></path></svg>}>
+  Print
 </Button>
+
+<Button strength="primary" icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 18" className="injected-svg preview-icon" data-src="./img/print-icon.svg"><path fill="#fefefe" d="M4.75 12v6h9.5v-6zm1.19 2.4h7.12v-1.2H5.94zm0 2.4h7.12v-1.2H5.94zM4.75 0v6h9.5V0h-9.5z"></path><path fill="#fefefe" d="M16.62 3.6h-1.19v3.6H3.56V3.6H2.38A2.57 2.57 0 0 0 0 6v6a2.57 2.57 0 0 0 2.38 2.4h1.18v-3.6h11.87v3.6h1.19A2.57 2.57 0 0 0 19 12V6a2.57 2.57 0 0 0-2.38-2.4"></path></svg>} />
 ```
 
-And you _can_ **use** `any` [Markdown](http://daringfireball.net/projects/markdown/) here.
-
-Fenced code blocks with `js`, `jsx` or `javascript` languages are rendered as a interactive playgrounds:
+Secondary button:
 
 ```jsx
-<Button>Push Me</Button>
+<Button strength="secondary">Secondary</Button>
+<Button strength="secondary" size="large" style={{ margin: '0 8px' }}>Big &amp; Secondary</Button>
+<Button strength="secondary" disabled>Disabled &amp; Secondary</Button>
 ```
 
-You can add a custom props to an example wrapper (` ```js { "props": { "className": "checks" } } `):
-
-```js { "props": { "className": "checks" } }
-<Button>I’m transparent!</Button>
-```
-
-Or disable an editor by passing a `noeditor` modifier (` ```js noeditor `):
-
-```jsx noeditor
-<Button>Push Me</Button>
-```
-
-To render an example as highlighted source code add a `static` modifier: (` ```js static `):
-
-```js static
-import React from 'react'
-```
-
-Fenced blocks with other languages are rendered as highlighted code:
-
-```html
-<h1>Hello world</h1>
-```
-
-Each example has its own state that you can access at the `state` variable and change with the `setState` function. Default state is `{}`:
-
-```jsx
-<div>
-  <Button
-    size="small"
-    onClick={() => setState({ isOpen: true })}
-    disabled={state.isOpen}
-  >
-    Show Me
-  </Button>
-  {state.isOpen && (
-    <Button size="small" onClick={() => setState({ isOpen: false })}>
-      Hide Me
-    </Button>
-  )}
-</div>
-```
-
-You can change the default state:
-
-```jsx
-initialState = { count: 42 }
-;<Button onClick={() => setState({ count: state.count + 1 })}>
-  {state.count}
-</Button>
-```
+<br>
+<br>
+<br>
+<br>
